@@ -8,10 +8,8 @@ public class PascalsTriangle {
         System.out.print("Enter n : ");
         int n = input.nextInt();
         long p = 0;
-        for (int i = 1; i < n; i++) {
-            if (i > 1)
-                System.out.print(1 + " ");
-            for (int j = 1; j <= i; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= i; j++) {
                 System.out.print(Factorial(i) / (Factorial(j) * Factorial(i - j)) + " ");
             }
             System.out.print("\n");
