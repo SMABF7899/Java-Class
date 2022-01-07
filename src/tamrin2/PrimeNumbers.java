@@ -10,20 +10,20 @@ public class PrimeNumbers {
         int a = input.nextInt();
         System.out.print("Enter b : ");
         int b = input.nextInt();
-        int n = (b - a) + 1;
-        int[] numbers = new int[n];
-        ArrayList<Integer> primeNumbers = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            numbers[i] = a + i;
+        ArrayList<Integer> primes = new ArrayList<>();
+        for (int i = a; i <= b; i++) {
+            if (i != 0 && i != 1 && isPrime(i))
+                primes.add(i);
         }
-        for (int i = 0; i < n; i++) {
-            if (numbers[i] == 2)
-                primeNumbers.add(numbers[i]);
-            if (numbers[i] == 3)
-                primeNumbers.add(numbers[i]);
-            else if (numbers[i] != 1 && ((numbers[i] + 1) % 6 == 0 || (numbers[i] - 1) % 6 == 0))
-                primeNumbers.add(numbers[i]);
+        System.out.println(primes);
+        System.out.println(isPrime(4));
+    }
+    public static boolean isPrime(int n) {
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) {
+                return false;
+            }
         }
-        System.out.println(primeNumbers);
+        return true;
     }
 }
