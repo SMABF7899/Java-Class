@@ -1,5 +1,7 @@
 package com.company;
 
+import Session8.Employee;
+
 import java.util.*;
 
 public class Main {
@@ -82,6 +84,9 @@ public class Main {
         }
         System.out.println(f(10));
         System.out.println(g(10));
+        Session8.Employee employee = new Session8.Employee("A", 1, 100, 20000000);
+        //System.out.println(employee.name);
+        employee.setName("بنی");
     }
 
     static int f(int x) {
