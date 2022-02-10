@@ -11,9 +11,8 @@ public class Soldier {
         this.id = id;
     }
 
-    public void setBullet(int[] bullet, String initialRank) {
+    public void setBullet(int[] bullet) {
         this.bullet = bullet;
-        this.initialRank = initialRank;
     }
 
     public void setFinalRank(String finalRank) {
@@ -49,6 +48,6 @@ public class Soldier {
     }
 
     public static float personOfCorporals(int n) {
-        return (n / 15f) * 100;
+        return (n / 30f) * 100;
     }
 }
