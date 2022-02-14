@@ -2,7 +2,7 @@ package Session10;
 
 public class Shark extends Fish{
     public Shark(String name) {
-        super(name);
+        //super(name);
     }
 
     public String greet() {
