@@ -42,7 +42,7 @@ public class Store {
                 while (!Objects.equals(Password, adminPass)) {
                     System.out.println("Incorrect password. Try again");
                     System.out.print("Enter Password : ");
-                    Password = input.nextLine();
+                    Password = input.next();
                 }
                 System.out.println("Login with admin");
                 int flag = 1;
@@ -83,13 +83,13 @@ public class Store {
                         }
                         System.out.println(Color.ANSI_BLUE + "====================================================================================================================" + Color.ANSI_RESET);
                         System.out.print("\n");
-                        System.out.println(Color.ANSI_BLUE + "\n============================================================================================================================================================" + Color.ANSI_RESET);
-                        System.out.printf(Color.ANSI_CYAN + "%-7s%-25s%-25s%-25s%-25s%-25s%-25s%-25s%n", "ID", "Model", "Type", "Brand", "Number", "Price", "Username", "Date" + Color.ANSI_RESET);
-                        System.out.println(Color.ANSI_BLUE + "------------------------------------------------------------------------------------------------------------------------------------------------------------" + Color.ANSI_RESET);
+                        System.out.println(Color.ANSI_BLUE + "\n========================================================================================================================================================================================================================" + Color.ANSI_RESET);
+                        System.out.printf(Color.ANSI_CYAN + "%-7s%-25s%-25s%-25s%-25s%-25s%-25s%-25s%n", "ID", "Model", "Type", "Brand", "Number", "Price", "Full name", "Date" + Color.ANSI_RESET);
+                        System.out.println(Color.ANSI_BLUE + "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + Color.ANSI_RESET);
                         for (int i = 0; i < payments.size(); i ++) {
-                            System.out.printf(Color.ANSI_CYAN + "%-7s%-25s%-25s%-25s%-25s%-25s%-25s%-25s%n", payments.get(i).getCommodity().getId(), payments.get(i).getCommodity().getModel(), payments.get(i).getCommodity().getType(), payments.get(i).getCommodity().getBrand(), payments.get(i).getCommodity().getNumber(), payments.get(i).getCommodity().getPrice(), payments.get(i).getUsername(), payments.get(i).getDate());
+                            System.out.printf(Color.ANSI_CYAN + "%-7s%-25s%-25s%-25s%-25s%-25s%-25s%-25s%n", payments.get(i).getCommodity().getId(), payments.get(i).getCommodity().getModel(), payments.get(i).getCommodity().getType(), payments.get(i).getCommodity().getBrand(), payments.get(i).getCommodity().getNumber(), payments.get(i).getCommodity().getPrice(), payments.get(i).getName(), payments.get(i).getDate());
                         }
-                        System.out.println(Color.ANSI_BLUE + "============================================================================================================================================================" + Color.ANSI_RESET);
+                        System.out.println(Color.ANSI_BLUE + "========================================================================================================================================================================================================================" + Color.ANSI_RESET);
                     } else if (operation == 0) {
                         System.out.println("Logout");
                         flag = 0;
@@ -97,7 +97,6 @@ public class Store {
                         System.out.println(Color.ANSI_RED + "Error selecting the desired operation, try again" + Color.ANSI_RESET);
                 }
             } else {
-                System.out.println("Please sign in or sign up (Sign in : 1 , Sign up : 0) : ");
                 System.out.println("You need to register to get started");
                 User user = new User();
                 Cart cart = new Cart(0);
@@ -180,7 +179,7 @@ public class Store {
                         if (cart.getCommodities() != null) {
                             System.out.println(Color.ANSI_GREEN + "Your purchase was successful" + Color.ANSI_RESET);
                             for (int i = 0; i < selectedCommodities.size(); i++) {
-                                payments.add(new Payments(user.getUserName(), selectedCommodities.get(i), LocalDate.now()));
+                                payments.add(new Payments(user.getFirstName() + " " + user.getLastName(), selectedCommodities.get(i), LocalDate.now()));
                             }
                             while (cart.getCommodities().size() != 0)
                                 cart.getCommodities().remove(0);

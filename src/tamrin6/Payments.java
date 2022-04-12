@@ -3,18 +3,18 @@ package tamrin6;
 import java.time.LocalDate;
 
 public class Payments {
-    private String username;
+    private String name;
     private Commodity commodity;
     private LocalDate date;
 
-    public Payments(String username, Commodity commodity, LocalDate date) {
-        this.username = username;
+    public Payments(String name, Commodity commodity, LocalDate date) {
+        this.name = name;
         this.commodity = commodity;
         this.date = date;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
     public Commodity getCommodity() {
