@@ -3,10 +3,14 @@ package tamrin6;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Store {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
+        Properties properties = new Properties();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        properties.load(classLoader.getResourceAsStream("Config.properties"));
         Scanner input = new Scanner(System.in);
         List<Commodity> commodities = new ArrayList<>();
         List<Commodity> selectedCommodities = new ArrayList<>();
@@ -28,7 +32,7 @@ public class Store {
         if (Objects.equals(admin.toUpperCase(Locale.ROOT), "YES")) {
             System.out.print("Enter Admin Password : ");
             String Password = input.nextLine();
-            File passwordFile = new File("/Users/smabf/IdeaProjects/Java-Class/src/tamrin6/Admin_Password.txt");
+            File passwordFile = new File(properties.getProperty("address_password_file") + "Admin_Password.txt");
             BufferedReader bufferedReader = new BufferedReader(new FileReader(passwordFile));
             String adminPass = bufferedReader.readLine();
             while (!Objects.equals(Password, adminPass)) {
