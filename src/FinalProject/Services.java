@@ -1,5 +1,6 @@
 package FinalProject;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Services {
@@ -48,21 +49,28 @@ public class Services {
                 System.out.println(Color.ANSI_GREEN + "reserved (" + date + ")" + Color.ANSI_RESET);
             }
         } else {
-            int flag = daysList.size();
-            Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-            while (flag != 0) {
+            if (daysList.size() != 0) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd HH:mm");
+                Calendar calendar = Calendar.getInstance();
+                ArrayList<Date> dates = new ArrayList<>();
                 for (int i = 0; i < daysList.size(); i++) {
-                    if (daysList.get(i).equals(daysList.get(daysList.size() - flag)))
-                        map.put(hoursList.get(i), minutesList.get(i));
+                    calendar.set(Calendar.DAY_OF_MONTH, daysList.get(i));
+                    calendar.set(Calendar.HOUR_OF_DAY, hoursList.get(i));
+                    calendar.set(Calendar.MINUTE, minutesList.get(i));
+                    dates.add(calendar.getTime());
                 }
-                System.out.println("day : " + daysList.get(daysList.size() - flag) + " " + map);
-                flag -= 1;
+                Map<String, Integer> map = new HashMap<String, Integer>();
+                for (int i = 0; i < reservedService.size(); i++) {
+                    map.put(simpleDateFormat.format(dates.get(i)), reservedService.get(i));
+                }
+            } else {
+                daysList.add(fistDay);
+                hoursList.add(firstHour);
+                minutesList.add(firsMinute);
+                reservedService.add(washingTime);
+                System.out.println(Color.ANSI_GREEN + "reserved (" + fistDay + " " + firstHour + ":" + firsMinute + ")" + Color.ANSI_RESET);
             }
         }
-//        System.out.println("daysList : " + daysList);
-//        System.out.println("hoursList : " + hoursList);
-//        System.out.println("minutesList : " + minutesList);
-//        System.out.println("reservedService : " + reservedService);
     }
 
     public static void getServicesAndDate(String request) {
@@ -96,7 +104,7 @@ public class Services {
                 case "rooshooyi" -> washingTime += rooshooyi;
                 case "nezafat" -> washingTime += nezafat;
                 case "sefrshooyi" -> washingTime += sefrshooyi;
-                default -> System.out.println("Error calling your request. Error number 3");
+                default -> System.out.println(Color.ANSI_RED + "Error calling your request. Error number 3" + Color.ANSI_RESET);
             }
         }
         return washingTime;
