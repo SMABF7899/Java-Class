@@ -1,9 +1,6 @@
 package FinalProject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Objects;
+import java.util.*;
 
 public class Services {
 
@@ -27,8 +24,8 @@ public class Services {
                     int hour = Integer.parseInt(date.split(" ")[1].split(":")[0]);
                     int minute = Integer.parseInt(date.split(" ")[1].split(":")[1]);
                     int TimeDifference = (hour - hoursList.get(hoursList.size() - flag)) * 60 + (minute - minutesList.get(minutesList.size() - flag));
-                    if ((day - daysList.get(daysList.size() - flag) == 0 && TimeDifference < 0 && Math.abs(TimeDifference) < washingTime) ||
-                            (day - daysList.get(daysList.size() - flag) == 0 && TimeDifference > 0 && TimeDifference < reservedService.get(reservedService.size() - flag))) {
+                    if ((day - daysList.get(daysList.size() - flag) == 0 && TimeDifference <= 0 && Math.abs(TimeDifference) < washingTime) ||
+                            (day - daysList.get(daysList.size() - flag) == 0 && TimeDifference >= 0 && TimeDifference < reservedService.get(reservedService.size() - flag))) {
                         System.out.println(Color.ANSI_RED + "cannot be reserved" + Color.ANSI_RESET);
                         break;
                     }
@@ -51,30 +48,15 @@ public class Services {
                 System.out.println(Color.ANSI_GREEN + "reserved (" + date + ")" + Color.ANSI_RESET);
             }
         } else {
-            ArrayList<Integer> newDay = new ArrayList<>(daysList);
-            ArrayList<Integer> newHours = new ArrayList<>(hoursList);
-            ArrayList<Integer> newMinutes = new ArrayList<>(minutesList);
-            int flag = newDay.size();
-            newDay.indexOf(Collections.min(newDay));
+            int flag = daysList.size();
+            Map<Integer, Integer> map = new HashMap<Integer, Integer>();
             while (flag != 0) {
-                if (fistDay - Collections.min(newDay) == 0 &&
-                        (Math.abs(firstHour - Collections.min(newHours)) * 60 + Math.abs(firsMinute - Collections.min(newMinutes) + reservedService.get(newDay.indexOf(Collections.min(newDay)))) < washingTime)) {
-                    flag -= 1;
-                    fistDay = Collections.min(newDay);
-                    firstHour = Collections.min(newHours);
-                    firsMinute = Collections.min(newMinutes);
-                    newDay.remove(Collections.min(newDay));
-                    newHours.remove(Collections.min(newHours));
-                    newMinutes.remove(Collections.min(newMinutes));
-                    if (flag == 0) {
-                        //
-                    }
-                } else {
-                    daysList.add(Collections.min(newDay));
-                    if (washingTime >= 60) {
-                        hoursList.add(Collections.min(newHours) + 1);
-                    }
+                for (int i = 0; i < daysList.size(); i++) {
+                    if (daysList.get(i).equals(daysList.get(daysList.size() - flag)))
+                        map.put(hoursList.get(i), minutesList.get(i));
                 }
+                System.out.println("day : " + daysList.get(daysList.size() - flag) + " " + map);
+                flag -= 1;
             }
         }
 //        System.out.println("daysList : " + daysList);
