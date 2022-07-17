@@ -13,7 +13,7 @@ public class Main {
             System.out.print("Please specify your request and desired time : ");
             Scanner input = new Scanner(System.in);
             String request = input.nextLine();
-            Services.getServicesAndDate(request);
+            Services.getServicesAndDateAndCarType(request);
         }
     }
 }
