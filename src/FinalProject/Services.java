@@ -20,7 +20,7 @@ public class Services {
                 int day = Integer.parseInt(date.split(" ")[0]);
                 int hour = Integer.parseInt(date.split(" ")[1].split(":")[0]);
                 int minute = Integer.parseInt(date.split(" ")[1].split(":")[1]);
-                if (hour >= 21)
+                if (hour >= 21 || hour < 9)
                     System.out.println(Color.ANSI_RED + "cannot be reserved" + Color.ANSI_RESET);
                 else {
                     int TimeDifference = (hour - hoursList.get(hoursList.size() - flag)) * 60 + (minute - minutesList.get(minutesList.size() - flag));
